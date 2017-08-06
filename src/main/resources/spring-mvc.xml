@@ -8,14 +8,36 @@
       http://www.springframework.org/schema/context/spring-context-3.1.xsd
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
-    <!-- 注解扫描包 -->
-    <context:component-scan base-package="com.citi.gunrose.controller.*"/>
+
     <!-- 开启mvc注解 -->
     <mvc:annotation-driven/>
 
+    <!-- json转换 -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJackson2HttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--这里加.*和不加有可能是两种结果，注意-->
+    <!-- 注解扫描包 -->
+    <context:component-scan base-package="com.citi.gunrose.controller"/>
+
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/"></property>
+        <property name="prefix" value="/WEB-INF/page/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
 </beans>

@@ -49,20 +49,19 @@
     </listener>
 
     <servlet>
-        <description>spring mvc servlet</description>
         <servlet-name>rest</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!-- 此处配置的是SpringMVC的配置文件 -->
             <param-value>classpath:spring-mvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!--这里的/和/*有很大的区别，要注意，有bug就换-->
     <servlet-mapping>
         <servlet-name>rest</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <filter-mapping>

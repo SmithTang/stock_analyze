@@ -23,7 +23,7 @@ public class HelloController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
-        return new ModelAndView("index");
+        return new ModelAndView("main");
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

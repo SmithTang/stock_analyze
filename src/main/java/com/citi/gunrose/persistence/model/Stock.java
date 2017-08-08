@@ -1,36 +1,46 @@
 package com.citi.gunrose.persistence.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
- * Created by tangjing on 2017/8/6.
+ * Created by tangjing on 2017/8/8.
  */
-@Entity
+@Entity(name = "stock")
 public class Stock {
-    private int id;
-    private String isin;
+    @Basic
+    @Column(name = "MarkID")
+    private int markId;
 
     @Id
-    @Column(name = "id")
-    public int getId() {
-        return id;
+    @Column(name = "StockName")
+    private String stockName;
+
+    @ManyToOne()
+    @JoinColumn(name = "MarkID", insertable = false, updatable = false)
+    private Market stockByStockName;
+
+    public int getMarkId() {
+        return markId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMarkId(int markId) {
+        this.markId = markId;
     }
 
-    @Basic
-    @Column(name = "ISIN")
-    public String getIsin() {
-        return isin;
+    public String getStockName() {
+        return stockName;
     }
 
-    public void setIsin(String isin) {
-        this.isin = isin;
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
+    }
+
+    public Market getStockByStockName() {
+        return stockByStockName;
+    }
+
+    public void setStockByStockName(Market stockByStockName) {
+        this.stockByStockName = stockByStockName;
     }
 
     @Override
@@ -40,16 +50,16 @@ public class Stock {
 
         Stock stock = (Stock) o;
 
-        if (id != stock.id) return false;
-        if (isin != null ? !isin.equals(stock.isin) : stock.isin != null) return false;
+        if (markId != stock.markId) return false;
+        if (stockName != null ? !stockName.equals(stock.stockName) : stock.stockName != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (isin != null ? isin.hashCode() : 0);
+        int result = markId;
+        result = 31 * result + (stockName != null ? stockName.hashCode() : 0);
         return result;
     }
 }

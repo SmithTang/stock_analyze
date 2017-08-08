@@ -6,22 +6,45 @@ import java.math.BigDecimal;
 /**
  * Created by tangjing on 2017/8/8.
  */
-@Entity
-public class Stockprice {
-    private int id;
-    private int timeTypeId;
-    private int stockId;
-    private String date;
-    private BigDecimal open;
-    private BigDecimal high;
-    private BigDecimal low;
-    private BigDecimal close;
-    private int volume;
-    private Timetype timetypeByTimeTypeId;
-    private Stock stockByStockId;
-
+@Entity(name = "stockprice_60min")
+public class Stockprice60Min {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "ID")
+    private int id;
+
+    @Basic
+    @Column(name = "StockName")
+    private String stockName;
+
+    @Basic
+    @Column(name = "Date")
+    private String date;
+
+    @Basic
+    @Column(name = "Open")
+    private BigDecimal open;
+
+    @Basic
+    @Column(name = "High")
+    private BigDecimal high;
+
+    @Basic
+    @Column(name = "Low")
+    private BigDecimal low;
+
+    @Basic
+    @Column(name = "Close")
+    private BigDecimal close;
+
+    @Basic
+    @Column(name = "Volume")
+    private int volume;
+
+    @ManyToOne()
+    @JoinColumn(name = "StockName", insertable = false, updatable = false)
+    private Stock stockByStockName;
+
     public int getId() {
         return id;
     }
@@ -30,28 +53,14 @@ public class Stockprice {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "TimeTypeID")
-    public int getTimeTypeId() {
-        return timeTypeId;
+    public String getStockName() {
+        return stockName;
     }
 
-    public void setTimeTypeId(int timeTypeId) {
-        this.timeTypeId = timeTypeId;
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
     }
 
-    @Basic
-    @Column(name = "StockID")
-    public int getStockId() {
-        return stockId;
-    }
-
-    public void setStockId(int stockId) {
-        this.stockId = stockId;
-    }
-
-    @Basic
-    @Column(name = "Date")
     public String getDate() {
         return date;
     }
@@ -60,8 +69,6 @@ public class Stockprice {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "Open")
     public BigDecimal getOpen() {
         return open;
     }
@@ -70,8 +77,6 @@ public class Stockprice {
         this.open = open;
     }
 
-    @Basic
-    @Column(name = "High")
     public BigDecimal getHigh() {
         return high;
     }
@@ -80,8 +85,6 @@ public class Stockprice {
         this.high = high;
     }
 
-    @Basic
-    @Column(name = "Low")
     public BigDecimal getLow() {
         return low;
     }
@@ -90,8 +93,6 @@ public class Stockprice {
         this.low = low;
     }
 
-    @Basic
-    @Column(name = "Close")
     public BigDecimal getClose() {
         return close;
     }
@@ -100,8 +101,6 @@ public class Stockprice {
         this.close = close;
     }
 
-    @Basic
-    @Column(name = "Volume")
     public int getVolume() {
         return volume;
     }
@@ -110,17 +109,24 @@ public class Stockprice {
         this.volume = volume;
     }
 
+    public Stock getStockByStockName() {
+        return stockByStockName;
+    }
+
+    public void setStockByStockName(Stock stockByStockName) {
+        this.stockByStockName = stockByStockName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Stockprice that = (Stockprice) o;
+        Stockprice60Min that = (Stockprice60Min) o;
 
         if (id != that.id) return false;
-        if (timeTypeId != that.timeTypeId) return false;
-        if (stockId != that.stockId) return false;
         if (volume != that.volume) return false;
+        if (stockName != null ? !stockName.equals(that.stockName) : that.stockName != null) return false;
         if (date != null ? !date.equals(that.date) : that.date != null) return false;
         if (open != null ? !open.equals(that.open) : that.open != null) return false;
         if (high != null ? !high.equals(that.high) : that.high != null) return false;
@@ -133,8 +139,7 @@ public class Stockprice {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + timeTypeId;
-        result = 31 * result + stockId;
+        result = 31 * result + (stockName != null ? stockName.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (open != null ? open.hashCode() : 0);
         result = 31 * result + (high != null ? high.hashCode() : 0);
@@ -144,23 +149,4 @@ public class Stockprice {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "TimeTypeID", referencedColumnName = "TypeID", nullable = false)
-    public Timetype getTimetypeByTimeTypeId() {
-        return timetypeByTimeTypeId;
-    }
-
-    public void setTimetypeByTimeTypeId(Timetype timetypeByTimeTypeId) {
-        this.timetypeByTimeTypeId = timetypeByTimeTypeId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "StockID", referencedColumnName = "StockID", nullable = false)
-    public Stock getStockByStockId() {
-        return stockByStockId;
-    }
-
-    public void setStockByStockId(Stock stockByStockId) {
-        this.stockByStockId = stockByStockId;
-    }
 }

@@ -6,16 +6,29 @@ import java.sql.Date;
 /**
  * Created by tangjing on 2017/8/8.
  */
-@Entity
+@Entity(name = "vix")
 public class Vix {
-    private int vixid;
-    private int stockId;
-    private Date date;
-    private double value;
-    private Stock stockByStockId;
-
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "VIXID")
+    private int vixid;
+
+    @Basic
+    @Column(name = "StockName")
+    private String stockName;
+
+    @Basic
+    @Column(name = "Date")
+    private Date date;
+
+    @Basic
+    @Column(name = "Value")
+    private float value;
+
+    @ManyToOne()
+    @JoinColumn(name = "StockName", insertable = false, updatable = false)
+    private Stock stockByStockName;
+
     public int getVixid() {
         return vixid;
     }
@@ -24,18 +37,14 @@ public class Vix {
         this.vixid = vixid;
     }
 
-    @Basic
-    @Column(name = "StockID")
-    public int getStockId() {
-        return stockId;
+    public String getStockName() {
+        return stockName;
     }
 
-    public void setStockId(int stockId) {
-        this.stockId = stockId;
+    public void setStockName(String stockName) {
+        this.stockName = stockName;
     }
 
-    @Basic
-    @Column(name = "Date")
     public Date getDate() {
         return date;
     }
@@ -44,14 +53,20 @@ public class Vix {
         this.date = date;
     }
 
-    @Basic
-    @Column(name = "Value")
-    public double getValue() {
+    public float getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(float value) {
         this.value = value;
+    }
+
+    public Stock getStockByStockName() {
+        return stockByStockName;
+    }
+
+    public void setStockByStockName(Stock stockByStockName) {
+        this.stockByStockName = stockByStockName;
     }
 
     @Override
@@ -62,8 +77,8 @@ public class Vix {
         Vix vix = (Vix) o;
 
         if (vixid != vix.vixid) return false;
-        if (stockId != vix.stockId) return false;
-        if (Double.compare(vix.value, value) != 0) return false;
+        if (Float.compare(vix.value, value) != 0) return false;
+        if (stockName != null ? !stockName.equals(vix.stockName) : vix.stockName != null) return false;
         if (date != null ? !date.equals(vix.date) : vix.date != null) return false;
 
         return true;
@@ -71,23 +86,11 @@ public class Vix {
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = vixid;
-        result = 31 * result + stockId;
+        int result = vixid;
+        result = 31 * result + (stockName != null ? stockName.hashCode() : 0);
         result = 31 * result + (date != null ? date.hashCode() : 0);
-        temp = Double.doubleToLongBits(value);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (value != +0.0f ? Float.floatToIntBits(value) : 0);
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "StockID", referencedColumnName = "StockID", nullable = false)
-    public Stock getStockByStockId() {
-        return stockByStockId;
-    }
-
-    public void setStockByStockId(Stock stockByStockId) {
-        this.stockByStockId = stockByStockId;
-    }
 }

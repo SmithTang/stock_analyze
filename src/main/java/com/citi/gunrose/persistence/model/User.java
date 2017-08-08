@@ -1,21 +1,29 @@
 package com.citi.gunrose.persistence.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Created by tangjing on 2017/8/8.
  */
-@Entity
+@Entity(name = "user")
 public class User {
-    private int userId;
-    private String userName;
-    private String password;
-    private String email;
-    private Collection<Portfolio> portfoliosByUserId;
-
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "UserID")
+    private int userId;
+
+    @Basic
+    @Column(name = "UserName")
+    private String userName;
+
+    @Basic
+    @Column(name = "Password")
+    private String password;
+
+    @Basic
+    @Column(name = "Email")
+    private String email;
+
     public int getUserId() {
         return userId;
     }
@@ -24,8 +32,6 @@ public class User {
         this.userId = userId;
     }
 
-    @Basic
-    @Column(name = "UserName")
     public String getUserName() {
         return userName;
     }
@@ -34,8 +40,6 @@ public class User {
         this.userName = userName;
     }
 
-    @Basic
-    @Column(name = "Password")
     public String getPassword() {
         return password;
     }
@@ -44,8 +48,6 @@ public class User {
         this.password = password;
     }
 
-    @Basic
-    @Column(name = "Email")
     public String getEmail() {
         return email;
     }
@@ -76,14 +78,5 @@ public class User {
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "userByUserId")
-    public Collection<Portfolio> getPortfoliosByUserId() {
-        return portfoliosByUserId;
-    }
-
-    public void setPortfoliosByUserId(Collection<Portfolio> portfoliosByUserId) {
-        this.portfoliosByUserId = portfoliosByUserId;
     }
 }

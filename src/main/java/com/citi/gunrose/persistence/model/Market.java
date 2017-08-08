@@ -1,22 +1,29 @@
 package com.citi.gunrose.persistence.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by tangjing on 2017/8/8.
  */
 @Entity
 public class Market {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "MarketID")
     private int marketId;
+
+    @Basic
+    @Column(name = "MarketName")
     private String marketName;
+
+    @Basic
+    @Column(name = "Location")
     private String location;
+
+    @Basic
+    @Column(name = "Currency")
     private String currency;
 
-    @Id
-    @Column(name = "MarketID")
     public int getMarketId() {
         return marketId;
     }
@@ -25,8 +32,6 @@ public class Market {
         this.marketId = marketId;
     }
 
-    @Basic
-    @Column(name = "MarketName")
     public String getMarketName() {
         return marketName;
     }
@@ -35,8 +40,6 @@ public class Market {
         this.marketName = marketName;
     }
 
-    @Basic
-    @Column(name = "Location")
     public String getLocation() {
         return location;
     }
@@ -45,8 +48,6 @@ public class Market {
         this.location = location;
     }
 
-    @Basic
-    @Column(name = "Currency")
     public String getCurrency() {
         return currency;
     }

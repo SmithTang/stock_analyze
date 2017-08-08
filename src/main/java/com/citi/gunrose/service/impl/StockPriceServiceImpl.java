@@ -1,6 +1,6 @@
 package com.citi.gunrose.service.impl;
 
-import com.citi.gunrose.persistence.model.Stockprice;
+import com.citi.gunrose.persistence.model.Stockprice1Min;
 import com.citi.gunrose.service.StockPriceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,5 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service("stockPriceService")
 @Transactional
-public class StockPriceServiceImpl extends BaseServiceImpl<Stockprice> implements StockPriceService {
+public class StockPriceServiceImpl extends BaseServiceImpl<Stockprice1Min> implements StockPriceService {
 }

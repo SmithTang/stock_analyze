@@ -1,10 +1,9 @@
 package com.citi.gunrose.service;
 
-import com.citi.gunrose.dao.StockPriceDao;
-import com.citi.gunrose.persistence.model.Stockprice;
+import com.citi.gunrose.persistence.model.Stockprice1Min;
 
 /**
  * Created by tangjing on 2017/8/7.
  */
-public interface StockPriceService extends BaseService<Stockprice> {
+public interface StockPriceService extends BaseService<Stockprice1Min> {
 }

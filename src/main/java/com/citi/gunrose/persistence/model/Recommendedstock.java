@@ -1,21 +1,25 @@
 package com.citi.gunrose.persistence.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by tangjing on 2017/8/8.
  */
-@Entity
+@Entity(name = "recommendedstock")
 public class Recommendedstock {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "ID")
     private int id;
+
+    @Basic
+    @Column(name = "StockGroup_1")
     private String stockGroup1;
+
+    @Basic
+    @Column(name = "StockGroup_2")
     private String stockGroup2;
 
-    @Id
-    @Column(name = "ID")
     public int getId() {
         return id;
     }
@@ -24,8 +28,6 @@ public class Recommendedstock {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "StockGroup_1")
     public String getStockGroup1() {
         return stockGroup1;
     }
@@ -34,8 +36,6 @@ public class Recommendedstock {
         this.stockGroup1 = stockGroup1;
     }
 
-    @Basic
-    @Column(name = "StockGroup_2")
     public String getStockGroup2() {
         return stockGroup2;
     }

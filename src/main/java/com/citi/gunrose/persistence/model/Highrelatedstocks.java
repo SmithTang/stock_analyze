@@ -5,16 +5,29 @@ import javax.persistence.*;
 /**
  * Created by tangjing on 2017/8/8.
  */
-@Entity
+@Entity(name = "highrelatedstocks")
 public class Highrelatedstocks {
-    private int id;
-    private int stockId1;
-    private int stockId2;
-    private Stock stockByStockId1;
-    private Stock stockByStockId2;
-
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "ID")
+    private int id;
+
+    @Basic
+    @Column(name = "StockName_1")
+    private String stockName1;
+
+    @Basic
+    @Column(name = "StockName_2")
+    private String stockName2;
+
+    @ManyToOne()
+    @JoinColumn(name = "StockName", insertable = false, updatable = false)
+    private Stock stockByStockName1;
+
+    @ManyToOne()
+    @JoinColumn(name = "StockName", insertable = false, updatable = false)
+    private Stock stockByStockName2;
+
     public int getId() {
         return id;
     }
@@ -23,24 +36,36 @@ public class Highrelatedstocks {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "StockID_1")
-    public int getStockId1() {
-        return stockId1;
+    public String getStockName1() {
+        return stockName1;
     }
 
-    public void setStockId1(int stockId1) {
-        this.stockId1 = stockId1;
+    public void setStockName1(String stockName1) {
+        this.stockName1 = stockName1;
     }
 
-    @Basic
-    @Column(name = "StockID_2")
-    public int getStockId2() {
-        return stockId2;
+    public String getStockName2() {
+        return stockName2;
     }
 
-    public void setStockId2(int stockId2) {
-        this.stockId2 = stockId2;
+    public void setStockName2(String stockName2) {
+        this.stockName2 = stockName2;
+    }
+
+    public Stock getStockByStockName1() {
+        return stockByStockName1;
+    }
+
+    public void setStockByStockName1(Stock stockByStockName1) {
+        this.stockByStockName1 = stockByStockName1;
+    }
+
+    public Stock getStockByStockName2() {
+        return stockByStockName2;
+    }
+
+    public void setStockByStockName2(Stock stockByStockName2) {
+        this.stockByStockName2 = stockByStockName2;
     }
 
     @Override
@@ -51,8 +76,8 @@ public class Highrelatedstocks {
         Highrelatedstocks that = (Highrelatedstocks) o;
 
         if (id != that.id) return false;
-        if (stockId1 != that.stockId1) return false;
-        if (stockId2 != that.stockId2) return false;
+        if (stockName1 != null ? !stockName1.equals(that.stockName1) : that.stockName1 != null) return false;
+        if (stockName2 != null ? !stockName2.equals(that.stockName2) : that.stockName2 != null) return false;
 
         return true;
     }
@@ -60,28 +85,9 @@ public class Highrelatedstocks {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + stockId1;
-        result = 31 * result + stockId2;
+        result = 31 * result + (stockName1 != null ? stockName1.hashCode() : 0);
+        result = 31 * result + (stockName2 != null ? stockName2.hashCode() : 0);
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "StockID_1", referencedColumnName = "StockID", nullable = false)
-    public Stock getStockByStockId1() {
-        return stockByStockId1;
-    }
-
-    public void setStockByStockId1(Stock stockByStockId1) {
-        this.stockByStockId1 = stockByStockId1;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "StockID_2", referencedColumnName = "StockID", nullable = false)
-    public Stock getStockByStockId2() {
-        return stockByStockId2;
-    }
-
-    public void setStockByStockId2(Stock stockByStockId2) {
-        this.stockByStockId2 = stockByStockId2;
-    }
 }

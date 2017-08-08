@@ -1,6 +1,6 @@
 package com.citi.gunrose.controller;
 
-import com.citi.gunrose.persistence.model.Stockprice;
+import com.citi.gunrose.persistence.model.Stockprice1Min;
 import com.citi.gunrose.service.StockPriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class DemoController {
 
     @RequestMapping(value = "/data", method = RequestMethod.GET)
     @ResponseBody
-    public Stockprice data() {
-        Stockprice stockprice = stockPriceService.getById(1);
+    public Stockprice1Min data() {
+        Stockprice1Min stockprice = stockPriceService.getById(1);
 
         return stockprice;
     }

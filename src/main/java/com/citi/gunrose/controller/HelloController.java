@@ -35,14 +35,21 @@ public class HelloController {
 
     @RequestMapping(value = "/singlestock", method = RequestMethod.GET)
     public String singleStock() {
+
         return "singlestock";
     }
-//    @RequestMapping(value = "/Stock", method = RequestMethod.GET)
-//    public String Stock() {
-//        return "stock";
+    @RequestMapping(value = "/market", method = RequestMethod.GET)
+    public String Market() {
+        return "market";
+    }
+    @RequestMapping(value = "/export", method = RequestMethod.GET)
+    public String Export() {
+        return "export";
+    }
+}
 //    }
 //    @RequestMapping(value = "/", method = RequestMethod.GET)
 //    public String MyPortfolioList() {
 //        return "stock";
 //    }
-}
+

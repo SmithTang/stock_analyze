@@ -32,4 +32,17 @@ public class HelloController {
         Stock test = stockService.getById(1);
         return test;
     }
+
+    @RequestMapping(value = "/singlestock", method = RequestMethod.GET)
+    public String singleStock() {
+        return "singlestock";
+    }
+//    @RequestMapping(value = "/Stock", method = RequestMethod.GET)
+//    public String Stock() {
+//        return "stock";
+//    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String MyPortfolioList() {
+//        return "stock";
+//    }
 }

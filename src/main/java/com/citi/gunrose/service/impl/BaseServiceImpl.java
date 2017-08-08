@@ -36,6 +36,10 @@ public class BaseServiceImpl<T> implements BaseService<T> {
         return dao.findById(id);
     }
 
+    public List<T> getAll() {
+        return dao.findAll();
+    }
+
     public List<T> getByHQL(String hql, Object... params) {
         return dao.findByHQL(hql, params);
     }

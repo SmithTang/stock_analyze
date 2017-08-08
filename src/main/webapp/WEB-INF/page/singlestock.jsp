@@ -176,14 +176,38 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-8">
                     <!-- AREA CHART -->
-                    <div class="box box-primary line_chart" id="singlestock">
+                    <div class="line_chart" id="singlestock">
 
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
 
+                </div>
+                <div class="col-lg-4">
+                    <div class="box box-success">
+                        <div class="box-header">
+                            <h3 class="box-title">Search Box &amp; Selectors and Inputs</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label>Market</label>
+                                <select class="form-control select2" style="width: 100%;" id="market">
+                                    <option selected="selected">NYSE</option>
+                                    <option>NASDAQ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            Please select or input options.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <!-- DONUT CHART -->
                     <div class="box box-danger">
                         <div class="box-header with-border">
@@ -201,7 +225,6 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-
                 </div>
             </div>
         </section>

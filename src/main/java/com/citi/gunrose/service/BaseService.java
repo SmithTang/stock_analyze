@@ -15,5 +15,7 @@ public interface BaseService<T> {
 
     public T getById(Serializable id);
 
+    public List<T> getAll();
+
     public List<T> getByHQL(String hql, Object... params);
 }

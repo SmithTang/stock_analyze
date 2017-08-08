@@ -4,8 +4,20 @@ var myChart = echarts.init(document.getElementById('singlestock'));
 var data0={};
 var option={};
 $(document).ready(function () {
+
+    Init();
+
+})
+
+function Init() {
+    InitCandleStick();
+    InitMarketSelector();
+
+}
+
+function InitCandleStick() {
     $.ajax({
-        url: "stockprice/1min/A",
+        url: "stockprice/1min/C",
         type: "GET",
         contentType: "application/json; charset=utf-8",
         complete: function (data) {
@@ -18,7 +30,28 @@ $(document).ready(function () {
             }
         }
     });
-})
+}
+
+function InitMarketSelector() {
+    $("#market").ready(function () {
+        $.ajax({
+            url: "market/listAll",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            complete: function (data,textStatus,jqXHR) {
+                $("#market").empty();
+                $.each(data,function (index, value) {
+                    if(index == 0) {
+                        $("#market").append("<option value='" + value.marketId + "'"+ " selected='selected'>" + value.marketName + "</option>");
+                    }
+                    else {
+                        $("#market").append("<option value='" + value.marketId + "'>" + value.marketName + "</option>");
+                    }
+                })
+            }
+        });
+    })
+}
 
 function setOption() {
 

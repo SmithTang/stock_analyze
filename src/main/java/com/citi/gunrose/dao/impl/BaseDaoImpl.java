@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -51,6 +52,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
     public T findById(Serializable id) {
         return (T) this.getSession().get(this.clazz, id);
+    }
+
+    public List<T> findAll() {
+        return (List<T>) this.getSession().createQuery("from " + this.clazz.getName()).list();
     }
 
     public List<T> findByHQL(String hql, Object... params) {

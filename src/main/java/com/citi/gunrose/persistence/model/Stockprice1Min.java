@@ -1,7 +1,10 @@
 package com.citi.gunrose.persistence.model;
 
+import com.citi.gunrose.utils.StringDateConverter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by tangjing on 2017/8/8.
@@ -19,7 +22,8 @@ public class Stockprice1Min {
 
     @Basic
     @Column(name = "Date")
-    private String date;
+    @Convert(converter = StringDateConverter.class)
+    private Date date;
 
     @Basic
     @Column(name = "Open")
@@ -61,11 +65,11 @@ public class Stockprice1Min {
         this.stockName = stockName;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

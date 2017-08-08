@@ -1,7 +1,5 @@
 package com.citi.gunrose.persistence.model;
 
-import com.citi.gunrose.persistence.model.Market;
-
 import javax.persistence.*;
 
 /**

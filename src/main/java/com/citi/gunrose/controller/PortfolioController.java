@@ -104,24 +104,11 @@ public class PortfolioController {
         return "/listAll";
     }
 
-
-
-//    @RequestMapping("listAll")
-//    public String listAll(Map<String,Object> model) {
-//        String hql = "from Portfolio as p where p.PortfolioName=:name ";
-//        portfolioService.getByHQL(hql,)
-//        List<Portfolio> portfolioList = portfolioService
-//                testService.caseList();
-//        model.put("caseList", caseList);
-//        //return "caseList";
-//        return "table";
-//    }
     @RequestMapping("listAll")
-    public String findAllCourse(HttpServletRequest request,
-                                HttpServletResponse response) {
+    public String findAllCourse(HttpServletRequest request, HttpServletResponse response) {
         try {
             String pageNo = request.getParameter("pageNo");
-            String hql = "from Portfolio as p where p.PortfolioName=:name ";
+            String hql = "from Portfolio as p where p.PortfolioName like ?";
             String PortfolioName = request.getParameter("PortfolioName");
             if (pageNo == null) {
                 pageNo = "1";

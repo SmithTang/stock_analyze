@@ -1,9 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2017/8/8
+  Time: 15:02
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Single Stock Analysis</title>
+    <title>Market Analysis</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -19,8 +26,6 @@
     <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="resources/css/singlestock.css">
 
-    <!-- Select2 -->
-    <link rel="stylesheet" href="resources/bower_components/select2/dist/css/select2.min.css">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -33,7 +38,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>G&R</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Gun&Rose</b></span>
+            <span class="logo-lg"><b>G&R</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -177,79 +182,33 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <div class="row" id="mainContent">
-                <div class="col-lg-8">
+            <div class="row">
+                <div class="col-md-12">
                     <!-- AREA CHART -->
-                    <div class="line_chart" id="singlestock">
+                    <div class="box box-primary line_chart" id="singlestock">
 
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
 
-                </div>
-                <div class="col-lg-4">
-                    <div class="box box-success">
-                        <div class="box-header">
-                            <h3 class="box-title">Search Box &amp; Selectors and Inputs</h3>
-                        </div>
-                        <div class="box-body">
-                            <!-- 右侧控件组 -->
-                            <div class="form-group">
-                                <label>Market</label>
-                                <select class="form-control select2" style="width: 100%;" id="market">
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Stock Name</label>
-                                <select class="form-control select2" style="width: 100%;" id="stockName">
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Catagory</label>
-                                <select class="form-control select2" style="width: 100%;" id="category">
-                                    <option value="1min" selected="selected">1min</option>
-                                    <option value="1day">1day</option>
-                                    <option value="5min">5min</option>
-                                    <option value="10min">10min</option>
-                                    <option value="15min">15min</option>
-                                    <option value="30min">30min</option>
-                                    <option value="60min">60min</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <button type="button" class="btn btn-block btn-success" id="search">Search</button>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            Please select or input options.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
                     <!-- DONUT CHART -->
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Please Choose a stock first.</h3>
+                            <h3 class="box-title">Donut Chart</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times"></i></button>
+                            </div>
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body">
-                            <table class="table table-bordered" id="relateTable">
-                                <tr>
-                                    <th style="width: 40px">Relative Rate</th>
-                                    <th>Stock Name</th>
-                                    <th>Relevant Weight</th>
-                                    <th style="width: 40px">Situation</th>
-                                </tr>
-                            </table>
+                            <canvas id="pieChart" style="height: 265px; width: 530px;" width="530" height="265"></canvas>
                         </div>
+                        <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
+
                 </div>
             </div>
         </section>
@@ -472,11 +431,9 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="resources/bower_components/chart.js/Chart.js"></script>
-<script src="js/echarts/echarts.js"></script>
-
-<!-- Select2 -->
-<script src="resources/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="resources/bower_components/Chart.js/Chart.js"></script>
+<script src="js/echarts/echarts.min.js"></script>
 <script src="js/apps/singlestock.js"></script>
 </body>
 </html>
+

@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="resources/css/singlestock.css">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="resources/bower_components/select2/dist/css/select2.min.css">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -175,7 +177,7 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <div class="row">
+            <div class="row" id="mainContent">
                 <div class="col-lg-8">
                     <!-- AREA CHART -->
                     <div class="line_chart" id="singlestock">
@@ -191,12 +193,21 @@
                             <h3 class="box-title">Search Box &amp; Selectors and Inputs</h3>
                         </div>
                         <div class="box-body">
+                            <!-- 右侧控件组 -->
                             <div class="form-group">
                                 <label>Market</label>
                                 <select class="form-control select2" style="width: 100%;" id="market">
-                                    <option selected="selected">NYSE</option>
-                                    <option>NASDAQ</option>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Stock Name</label>
+                                <select class="form-control select2" style="width: 100%;" id="stockName">
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-block btn-success" id="search">Search</button>
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -456,6 +467,8 @@
 <script src="resources/bower_components/chart.js/Chart.js"></script>
 <script src="js/echarts/echarts.js"></script>
 
+<!-- Select2 -->
+<script src="resources/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="js/apps/singlestock.js"></script>
 </body>
 </html>

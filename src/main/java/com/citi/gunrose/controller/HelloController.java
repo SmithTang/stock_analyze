@@ -33,6 +33,11 @@ public class HelloController {
         return test;
     }
 
+    @RequestMapping(value = "/main", method = RequestMethod.GET)
+    public String Main() {
+
+        return "main";
+    }
     @RequestMapping(value = "/singlestock", method = RequestMethod.GET)
     public String singleStock() {
 

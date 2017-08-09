@@ -1,9 +1,23 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2017/8/8
+  Time: 16:55
+  To change this template use File | Settings | File Templates.
+--%>
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2017/8/8
+  Time: 15:02
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Single Stock Analysis</title>
+    <title>Export Data</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -17,7 +31,35 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="resources/css/singlestock.css">
+    <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="resources/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="resources/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="resources/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="resources/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="resources/plugins/iCheck/all.css">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="resources/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="resources/plugins/timepicker/bootstrap-timepicker.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="resources/bower_components/select2/dist/css/select2.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="resources/adminLTE/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -130,8 +172,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
+                        <li><a href="add"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
 
                     </ul>
                 </li>
@@ -141,7 +182,7 @@
                     </a>
                 </li>
                 <li >
-                    <a href="market">
+                    <a href="#">
                         <i class="glyphicon glyphicon-globe"></i> <span>Market Analysis</span>
                     </a>
                 </li>
@@ -164,42 +205,63 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="input-group input-group-sm" style="width: 300px;">
-                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search stock name...">
 
-                <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                </div>
-            </div>
-        </section>
         <!-- Main content -->
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
                     <!-- AREA CHART -->
-                    <div class="box box-primary line_chart" id="singlestock">
+                    <div class="form-group" style="width: 1000px;margin-left: 10px;">
+                        <label>Choose start time and end time:</label>
 
-                        <!-- /.box-body -->
+                        <div class="input-group" style="width: 1000px;">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <input type="text" class="form-control pull-right" id="reservationtime">
+                        </div>
+                        <!-- /.input group -->
+                    </div>
+
+                    <div class="form-group" style="margin-left: 10px;margin-top: 30px;width: 400px;">
+                        <label>Choose the file type:</label>
+                        <select class="form-control">s
+                            <option>.json</option>
+                            <option>.txt</option>
+                            <option>.xml</option>
+                            <option>.exl</option>
+                        </select>
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-warning" style="margin-top: 30px;">
+                            Input the file path
+                        </button>
+                        <div class="modal modal-warning fade" id="modal-warning">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Warning Modal</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>input the file path...&hellip;</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-outline">Save changes</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                    </div>
+                    <div style="margin-left: 10px;margin-top: 50px;width:100px;">
+                        <button type="button" class="btn btn-block btn-primary btn-lg">Export</button>
                     </div>
                     <!-- /.box -->
 
                     <!-- DONUT CHART -->
-                    <div class="box box-danger">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Donut Chart</h3>
 
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body">
-                            <canvas id="pieChart" style="height: 265px; width: 530px;" width="530" height="265"></canvas>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
                     <!-- /.box -->
 
                 </div>
@@ -406,6 +468,7 @@
 </div>
 <!-- ./wrapper -->
 
+
 <!-- jQuery 3 -->
 <script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -416,6 +479,7 @@
 
 </script>
 <!-- Bootstrap 3.3.7 -->
+<script src="resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Slimscroll -->
 <script src="resources/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
@@ -425,8 +489,11 @@
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
 <script src="resources/bower_components/chart.js/Chart.js"></script>
-<script src="js/echarts/echarts.js"></script>
-
-<script src="js/apps/singlestock.js"></script>
+<script src="resources/bower_components/moment/min/moment.min.js"></script>
+<script src="resources/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="resources/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="js/apps/export.js"></script>
 </body>
 </html>
+
+

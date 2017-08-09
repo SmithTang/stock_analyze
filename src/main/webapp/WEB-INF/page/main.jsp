@@ -112,7 +112,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
                 <li>
-                    <a href="#">
+                    <a href="main">
                         <i class="fa fa-bar-chart-o"></i> <span>Stocks</span>
 
                     </a>
@@ -483,7 +483,7 @@
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
 <script src="resources/bower_components/Chart.js/Chart.js"></script>
-<script src="resources/EchartJS/echarts.min.js"></script>
-<script src="resources/js/singlestock.js"></script>
+<script src="js/echarts/echarts.min.js"></script>
+<script src="js/apps/singlestock.js"></script>
 </body>
 </html>

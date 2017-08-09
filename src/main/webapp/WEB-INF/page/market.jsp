@@ -1,9 +1,16 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: Administrator
+  Date: 2017/8/8
+  Time: 15:02
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Single Stock Analysis</title>
+    <title>Market Analysis</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -31,7 +38,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>G&R</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Gun&Rose</b></span>
+            <span class="logo-lg"><b>G&R</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -424,9 +431,9 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="resources/bower_components/chart.js/Chart.js"></script>
-<script src="js/echarts/echarts.js"></script>
-
+<script src="resources/bower_components/Chart.js/Chart.js"></script>
+<script src="js/echarts/echarts.min.js"></script>
 <script src="js/apps/singlestock.js"></script>
 </body>
 </html>
+

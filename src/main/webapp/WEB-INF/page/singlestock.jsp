@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="resources/css/singlestock.css">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="resources/bower_components/select2/dist/css/select2.min.css">
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -175,15 +177,48 @@
         </section>
         <!-- Main content -->
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row" id="mainContent">
+                <div class="col-lg-8">
                     <!-- AREA CHART -->
-                    <div class="box box-primary line_chart" id="singlestock">
+                    <div class="line_chart" id="singlestock">
 
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
 
+                </div>
+                <div class="col-lg-4">
+                    <div class="box box-success">
+                        <div class="box-header">
+                            <h3 class="box-title">Search Box &amp; Selectors and Inputs</h3>
+                        </div>
+                        <div class="box-body">
+                            <!-- 右侧控件组 -->
+                            <div class="form-group">
+                                <label>Market</label>
+                                <select class="form-control select2" style="width: 100%;" id="market">
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Stock Name</label>
+                                <select class="form-control select2" style="width: 100%;" id="stockName">
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-block btn-success" id="search">Search</button>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            Please select or input options.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <!-- DONUT CHART -->
                     <div class="box box-danger">
                         <div class="box-header with-border">
@@ -201,7 +236,6 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-
                 </div>
             </div>
         </section>
@@ -427,6 +461,8 @@
 <script src="resources/bower_components/chart.js/Chart.js"></script>
 <script src="js/echarts/echarts.js"></script>
 
+<!-- Select2 -->
+<script src="resources/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="js/apps/singlestock.js"></script>
 </body>
 </html>

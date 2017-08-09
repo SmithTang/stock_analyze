@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by tangjing on 2017/8/6.
  */
@@ -15,4 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class StockServiveImpl extends BaseServiceImpl<Stock> implements StockService {
     @Autowired
     private StockDao stockDao;
+
+    @Override
+    public List<String> getNames() {
+        return stockDao.selectNames(100);
+    }
+
+    @Override
+    public List<String> searchNames(int marketID, String term) {
+        return stockDao.searchNames(marketID, term);
+    }
 }

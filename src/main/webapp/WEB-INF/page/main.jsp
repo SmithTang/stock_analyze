@@ -129,9 +129,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
+                        <li><a href="list"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
+                        <li><a href="addPortfolio"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
+                        <li><a href="searchStock"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
 
                     </ul>
                 </li>

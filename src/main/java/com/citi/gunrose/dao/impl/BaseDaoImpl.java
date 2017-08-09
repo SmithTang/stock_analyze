@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -53,11 +54,34 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         return (T) this.getSession().get(this.clazz, id);
     }
 
+    public List<T> findAll() {
+        return (List<T>) this.getSession().createQuery("from " + this.clazz.getName()).list();
+    }
+
     public List<T> findByHQL(String hql, Object... params) {
         Query query = this.getSession().createQuery(hql);
         for (int i = 0; params != null && i < params.length; i++) {
             query.setParameter(i, params);
         }
         return query.list();
+    }
+
+    public List<T> queryForPage(int offset, int length, String hql, Object... params) {
+
+        List<T> entitylist=null;
+        try{
+            Query query = this.getSession().createQuery(hql);
+            for (int i = 0; params != null && i < params.length; i++) {
+                query.setParameter(i, params);
+            }
+            query.setFirstResult(offset);
+            query.setMaxResults(length);
+            entitylist = query.list();
+
+        }catch(RuntimeException re){
+            throw re;
+        }
+
+        return entitylist;
     }
 }

@@ -1,6 +1,7 @@
 package com.citi.gunrose.controller;
 
 import com.citi.gunrose.persistence.model.Stockprice1Min;
+import com.citi.gunrose.service.StockPrice1DayService;
 import com.citi.gunrose.service.StockPrice1MinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,19 @@ public class StockPriceController {
     @Autowired
     private StockPrice1MinService stockPrice1MinService;
 
+    @Autowired
+    private StockPrice1DayService stockPrice1DayService;
+
     @RequestMapping(value = "/1min/{stockname}", method = RequestMethod.GET)
     @ResponseBody
     public List<Object[]> get1MinPriceByStockName(@PathVariable("stockname") String stockName) {
-        return stockPrice1MinService.selectListByStockName(stockName);
+        return stockPrice1MinService.getListByStockName(stockName);
+    }
+
+    @RequestMapping(value = "/1day/{stockname}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object[]> get1DayPriceByStockName(@PathVariable("stockname") String stockName) {
+        return stockPrice1DayService.getListByStockName(stockName);
     }
 
 }

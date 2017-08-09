@@ -8,7 +8,7 @@ import java.util.Date;
 public class PortfolioList {
     int stockCount;
     String portfolioName;
-    Date date ;
+    String date ;
     String Description;
 
     public String getDescription() {
@@ -35,11 +35,11 @@ public class PortfolioList {
         this.portfolioName = portfolioName;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

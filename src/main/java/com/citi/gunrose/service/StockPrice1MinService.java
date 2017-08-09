@@ -9,6 +9,6 @@ import java.util.List;
  */
 public interface StockPrice1MinService extends BaseService<Stockprice1Min> {
 
-    List<Object[]> selectListByStockName(String stockName);
+    List<Object[]> getListByStockName(String stockName);
 
 }

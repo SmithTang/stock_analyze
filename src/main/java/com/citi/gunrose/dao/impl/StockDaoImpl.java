@@ -5,8 +5,6 @@ import com.citi.gunrose.persistence.model.Stock;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,13 +12,17 @@ import java.util.List;
  */
 @Repository("stockDao")
 public class StockDaoImpl extends BaseDaoImpl<Stock> implements StockDao {
+    @Override
+    public List<String> selectNames(int maxSize) {
+        SQLQuery sqlQuery = this.getSession().createSQLQuery("select s.StockName from data_analysis.stock s");
+        sqlQuery.setMaxResults(maxSize);
+        return (List<String>) sqlQuery.list();
+    }
 
-    public List<Stock> queryStockByName(String name) {
-
-        SQLQuery sqlQuery1 = this.getSession().createSQLQuery("select * from stock as s where s.StockName ='"+name+"'");
-        sqlQuery1.addEntity(Stock.class);
-        List<Stock> stocks = sqlQuery1.list();
-
-        return stocks;
+    @Override
+    public List<String> searchNames(int marketID, String term) {
+        SQLQuery sqlQuery = this.getSession().createSQLQuery("select s.StockName from data_analysis.stock s where s.MarkID =" + marketID + " and s.StockName like '%" + term + "%'");
+        sqlQuery.setMaxResults(20);
+        return (List<String>) sqlQuery.list();
     }
 }

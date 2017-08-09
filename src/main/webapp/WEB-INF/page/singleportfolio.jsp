@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -177,92 +179,31 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                <div class="col-md-12">
-                    <!-- AREA CHART -->
-
-                        <div class="box">
+                        <div class="box" style="width: 800px;">
                             <!-- /.box-header -->
-                            <div class="box-body table-responsive no-padding">
+                            <div class="box-body table-responsive no-padding" >
                                 <table class="table table-hover">
-                                    <tbody><tr>
-                                        <th>Stock Name</th>
-                                        <th>Real-time Price</th>
-                                        <th>Increase rate</th>
-                                    </tr>
                                     <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-success" style="width: 400px;">+12.45</span></td>
+                                        <td>Stock Name</td>
+                                        <td>Market</td>
+                                        <td>Description</td>
+                                        <td>Operate</td>
                                     </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-success">+12.45</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-success">+12.45</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-danger">-8.45</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-success">+13.89</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>A</td>
-                                        <td>17.62</td>
-                                        <td><span class="label label-danger" >-18.76</span></td>
-                                    </tr>
+                                    <c:forEach items="${stock }" var="p" >
+                                        <tr>
+                                            <td><a href="${pageContext.request.contextPath }/queryPortfolio?name=${p.stockName }">${p.stockName }</a></td>
+                                            <td>${p.markId }</td>
+                                            <td>Just Test</td>
+                                            <td><a href="${pageContext.request.contextPath }/delete">delete&nbsp;</a></td>
+                                        </tr>
 
-
-
-                                    </tbody></table>
+                                    </c:forEach>
+                                </table>
                             </div>
                             <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
-
-                    <!-- /.box -->
-
-                    <!-- DONUT CHART -->
-                    <div class="col-md-6">
-                        <div class="box box-primary stock_line_chart" id="singlestock">
-
-                        <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
-                    <!-- /.box -->
-                    <div class="col-md-6">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Bar Chart</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                            </div>
-                        </div>
-                        <div class="box-body chart-responsive">
-                            <div class="chart" id="bar-chart" style="height: 300px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="300" version="1.1" width="510" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.5px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="30.5" y="263" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan></text><path fill="none" stroke="#aaaaaa" d="M43,263H484.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="30.5" y="203.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">25</tspan></text><path fill="none" stroke="#aaaaaa" d="M43,203.5H484.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="30.5" y="144" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">50</tspan></text><path fill="none" stroke="#aaaaaa" d="M43,144H484.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="30.5" y="84.5" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">75</tspan></text><path fill="none" stroke="#aaaaaa" d="M43,84.5H484.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="30.5" y="25" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">100</tspan></text><path fill="none" stroke="#aaaaaa" d="M43,25H484.5" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="452.9642857142857" y="275.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,6)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2012</tspan></text><text x="326.82142857142856" y="275.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,6)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2010</tspan></text><text x="200.67857142857142" y="275.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,6)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2008</tspan></text><text x="74.53571428571428" y="275.5" text-anchor="middle" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal" transform="matrix(1,0,0,1,0,6)"><tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">2006</tspan></text><rect x="50.88392857142857" y="25" width="22.151785714285715" height="238" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="76.03571428571428" y="48.80000000000001" width="22.151785714285715" height="214.2" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="113.95535714285714" y="84.5" width="22.151785714285715" height="178.5" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="139.10714285714286" y="108.30000000000001" width="22.151785714285715" height="154.7" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="177.02678571428572" y="144" width="22.151785714285715" height="119" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="202.17857142857144" y="167.8" width="22.151785714285715" height="95.19999999999999" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="240.09821428571428" y="84.5" width="22.151785714285715" height="178.5" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="265.25" y="108.30000000000001" width="22.151785714285715" height="154.7" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="303.16964285714283" y="144" width="22.151785714285715" height="119" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="328.32142857142856" y="167.8" width="22.151785714285715" height="95.19999999999999" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="366.2410714285714" y="84.5" width="22.151785714285715" height="178.5" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="391.3928571428571" y="108.30000000000001" width="22.151785714285715" height="154.7" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="429.3125" y="25" width="22.151785714285715" height="238" rx="0" ry="0" fill="#00a65a" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect><rect x="454.4642857142857" y="48.80000000000001" width="22.151785714285715" height="214.2" rx="0" ry="0" fill="#f56954" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect></svg><div class="morris-hover morris-default-style" style="left: 42.5357px; top: 112px; display: none;"><div class="morris-hover-row-label">2006</div><div class="morris-hover-point" style="color: #00a65a">
-                                CPU:
-                                100
-                            </div><div class="morris-hover-point" style="color: #f56954">
-                                DISK:
-                                90
-                            </div></div></div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
 
                 </div>
-            </div>
         </section>
         <!-- /.content -->
     </div>

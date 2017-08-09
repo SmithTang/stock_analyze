@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -33,9 +34,11 @@ public class UserController {
     }
 
     @RequestMapping("toLogin")
-    public String loginSuccess(@ModelAttribute("user") User user, RedirectAttributes attr) {
+    public String loginSuccess(@ModelAttribute("user") User user, HttpSession httpSession) {
 
         List<User> users = userService.queryList(user);
+        user = users.get(0);
+        httpSession.setAttribute("loginUser",user);
         if(users.isEmpty()) {
             return "/register";
         }

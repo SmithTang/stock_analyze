@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Data Analysis Tool | Gun&Rose</title>
+    <title>PortfolioManagement</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -17,7 +18,6 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="resources/adminLTE/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="resources/css/singlestock.css">
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -27,11 +27,11 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="/" class="logo">
+        <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>G&R</b></span>
+            <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Gun&Rose</b></span>
+            <span class="logo-lg"><b>Admin</b>LTE</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -111,7 +111,7 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
-                <li>
+                <li class="active treeview">
                     <a href="#">
                         <i class="fa fa-bar-chart-o"></i> <span>Stocks</span>
 
@@ -129,9 +129,9 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="list"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
-                        <li><a href="addPortfolio"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
-                        <li><a href="searchStock"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
+                        <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
+                        <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
+                        <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
 
                     </ul>
                 </li>
@@ -140,14 +140,14 @@
                         <i class="fa fa-line-chart"></i> <span>Single Stock</span>
                     </a>
                 </li>
-                <li>
-                    <a href="market">
+                <li class="active treeview menu-open">
+                    <a href="#">
                         <i class="glyphicon glyphicon-globe"></i> <span>Market Analysis</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="export">
+                <li class="active treeview menu-open">
+                    <a href="#">
                         <i class="glyphicon glyphicon-log-out"></i> <span>Export Data</span>
                     </a>
                 </li>
@@ -165,13 +165,15 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            <form action="searchPortfolio" method="post">
             <div class="input-group input-group-sm" style="width: 300px;">
-                <input type="text" name="table_search" class="form-control pull-right" placeholder="Search stock name...">
+                <input type="text" name="PortfolioName" class="form-control pull-right" placeholder="Search Portfolio...">
 
                 <div class="input-group-btn">
                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                 </div>
             </div>
+            </form>
         </section>
 
         <!-- Main content -->
@@ -184,11 +186,12 @@
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover">
-                                    <tbody><tr>
+                                    <tr>
+                                        <th>Portfolio ID</th>
+                                        <th>Portfolio Name</th>
                                         <th>Stock Name</th>
-                                        <th>Real-time Price</th>
-                                        <th>Increase rate</th>
                                     </tr>
+
                                     <tr>
                                         <td>A</td>
                                         <td>17.62</td>
@@ -220,9 +223,7 @@
                                         <td><span class="label label-danger" >-18.76</span></td>
                                     </tr>
 
-
-
-                                    </tbody></table>
+                                    </table>
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -232,9 +233,19 @@
 
                     <!-- DONUT CHART -->
                     <div class="col-md-6">
-                        <div class="box box-primary stock_line_chart" id="singlestock">
+                        <div class="box box-solid">
+                            <div class="box-header">
+                                <h3 class="box-title text-blue">Sparkline line</h3>
 
-                        <!-- /.box-body -->
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body text-center">
+                                <div class="sparkline" data-type="line" data-spot-radius="3" data-highlight-spot-color="#f39c12" data-highlight-line-color="#222" data-min-spot-color="#f56954" data-max-spot-color="#00a65a" data-spot-color="#39CCCC" data-offset="90" data-width="100%" data-height="100px" data-line-width="2" data-line-color="#39CCCC" data-fill-color="rgba(57, 204, 204, 0.08)"><canvas width="323" height="100" style="display: inline-block; width: 323px; height: 100px; vertical-align: top;"></canvas></div>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
                     </div>
@@ -267,7 +278,13 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
+        </div>
+        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </footer>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -483,7 +500,5 @@
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
 <script src="resources/bower_components/Chart.js/Chart.js"></script>
-<script src="resources/EchartJS/echarts.min.js"></script>
-<script src="resources/js/singlestock.js"></script>
 </body>
 </html>

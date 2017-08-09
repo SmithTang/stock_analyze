@@ -1,5 +1,7 @@
 package com.citi.gunrose.service;
 
+import com.citi.gunrose.persistence.model.Page;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,4 +20,5 @@ public interface BaseService<T> {
     public List<T> getAll();
 
     public List<T> getByHQL(String hql, Object... params);
+    public Page queryForPage(int currentPage, int pageSize, String hql, Object... params);
 }

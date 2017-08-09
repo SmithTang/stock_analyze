@@ -207,6 +207,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Catagory</label>
+                                <select class="form-control select2" style="width: 100%;" id="category">
+                                    <option value="1min" selected="selected">1min</option>
+                                    <option value="1day">1day</option>
+                                    <option value="5min">5min</option>
+                                    <option value="10min">10min</option>
+                                    <option value="15min">15min</option>
+                                    <option value="30min">30min</option>
+                                    <option value="60min">60min</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <button type="button" class="btn btn-block btn-success" id="search">Search</button>
                             </div>
                         </div>
@@ -222,18 +235,19 @@
                     <!-- DONUT CHART -->
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Donut Chart</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times"></i></button>
-                            </div>
+                            <h3 class="box-title">Please Choose a stock first.</h3>
                         </div>
+                        <!-- /.box-header -->
                         <div class="box-body">
-                            <canvas id="pieChart" style="height: 265px; width: 530px;" width="530" height="265"></canvas>
+                            <table class="table table-bordered" id="relateTable">
+                                <tr>
+                                    <th style="width: 40px">Relative Rate</th>
+                                    <th>Stock Name</th>
+                                    <th>Relevant Weight</th>
+                                    <th style="width: 40px">Situation</th>
+                                </tr>
+                            </table>
                         </div>
-                        <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
                 </div>

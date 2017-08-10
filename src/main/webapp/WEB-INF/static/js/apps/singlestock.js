@@ -10,10 +10,10 @@ $(document).ready(function () {
 })
 
 function Init() {
-    InitCandleStick();
     InitMarketSelector();
     InitStockNameSelector();
     InitCategorySelector();
+    InitCandleStick();
     InitSearchButton();
 }
 

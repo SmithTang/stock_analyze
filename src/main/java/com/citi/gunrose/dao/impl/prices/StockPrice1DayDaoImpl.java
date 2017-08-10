@@ -1,13 +1,11 @@
-package com.citi.gunrose.dao.impl;
+package com.citi.gunrose.dao.impl.prices;
 
-import com.citi.gunrose.dao.StockPrice1DayDao;
+import com.citi.gunrose.dao.impl.BaseDaoImpl;
+import com.citi.gunrose.dao.prices.StockPrice1DayDao;
 import com.citi.gunrose.persistence.model.Stockprice1Day;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,20 +19,9 @@ public class StockPrice1DayDaoImpl extends BaseDaoImpl<Stockprice1Day> implement
         sqlQuery.setMaxResults(maxSize);
         List<Object[]> result = sqlQuery.list();
 
-        for(Object[] each : result) {
-            try {
-                Date date = new SimpleDateFormat("yyyyMMdd").parse((String) each[0]);
-                each[0] = new SimpleDateFormat("yyyy-MM-dd").format(date);
-            }
-            catch (ParseException e) {
-                e.printStackTrace();
-
-            }
-        }
-
         //不使用Entity的原因是只需要5个数据
         //List<Stockprice1Min> test = sqlQuery.list();
         //List<Stockprice1Min> result = this.findByHQL("from Stockprice1Min as s where s.stockName=:stockName", stockName);
-        return result;
+        return this.stockPriceFormater(result, "yyyyMMdd");
     }
 }

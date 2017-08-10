@@ -1,6 +1,6 @@
-package com.citi.gunrose.dao;
+package com.citi.gunrose.dao.prices;
 
-import com.citi.gunrose.persistence.model.Stockprice1Day;
+import com.citi.gunrose.dao.BaseDao;
 import com.citi.gunrose.persistence.model.Stockprice1Min;
 
 import java.util.List;
@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * Created by tangjing on 2017/8/7.
  */
-public interface StockPrice1DayDao extends BaseDao<Stockprice1Day> {
+public interface StockPrice1MinDao extends BaseDao<Stockprice1Min> {
     List<Object[]> selectListByStockName(String stockName, int maxSize);
 }

@@ -1,7 +1,7 @@
 package com.citi.gunrose.controller;
 
 import com.citi.gunrose.persistence.model.Stockprice1Min;
-import com.citi.gunrose.service.StockPrice1MinService;
+import com.citi.gunrose.service.prices.StockPrice1MinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

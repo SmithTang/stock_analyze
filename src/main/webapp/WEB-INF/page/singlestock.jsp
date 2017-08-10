@@ -31,9 +31,9 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>G&R</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Gun&Rose</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -43,56 +43,16 @@
             </a>
 
             <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
 
 
                     <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
+
                                 <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+
+
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
-                </ul>
+
             </div>
         </nav>
     </header>
@@ -113,8 +73,8 @@
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="active treeview">
-                    <a href="#">
+                <li >
+                    <a href="main">
                         <i class="fa fa-bar-chart-o"></i> <span>Stocks</span>
 
                     </a>
@@ -131,9 +91,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
+                        <li><a href="list"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
+                        <li><a href="addPortfolio"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
 
                     </ul>
                 </li>
@@ -142,22 +101,18 @@
                         <i class="fa fa-line-chart"></i> <span>Single Stock</span>
                     </a>
                 </li>
-                <li class="active treeview menu-open">
+                <li >
                     <a href="market">
                         <i class="glyphicon glyphicon-globe"></i> <span>Market Analysis</span>
                     </a>
                 </li>
 
-                <li class="active treeview menu-open">
-                    <a href="#">
+                <li >
+                    <a href="export">
                         <i class="glyphicon glyphicon-log-out"></i> <span>Export Data</span>
                     </a>
                 </li>
 
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -207,6 +162,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Catagory</label>
+                                <select class="form-control select2" style="width: 100%;" id="category">
+                                    <option value="1min" selected="selected">1min</option>
+                                    <option value="1day">1day</option>
+                                    <option value="5min">5min</option>
+                                    <option value="10min">10min</option>
+                                    <option value="15min">15min</option>
+                                    <option value="30min">30min</option>
+                                    <option value="60min">60min</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <button type="button" class="btn btn-block btn-success" id="search">Search</button>
                             </div>
                         </div>
@@ -222,18 +190,19 @@
                     <!-- DONUT CHART -->
                     <div class="box box-danger">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Donut Chart</h3>
-
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-box-tool" data-widget="remove" ><i class="fa fa-times"></i></button>
-                            </div>
+                            <h3 class="box-title">Please Choose a stock first.</h3>
                         </div>
+                        <!-- /.box-header -->
                         <div class="box-body">
-                            <canvas id="pieChart" style="height: 265px; width: 530px;" width="530" height="265"></canvas>
+                            <table class="table table-bordered" id="relateTable">
+                                <tr>
+                                    <th style="width: 40px">Relative Rate</th>
+                                    <th>Stock Name</th>
+                                    <th>Relevant Weight</th>
+                                    <th style="width: 40px">Situation</th>
+                                </tr>
+                            </table>
                         </div>
-                        <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
                 </div>
@@ -242,13 +211,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-    </footer>
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">

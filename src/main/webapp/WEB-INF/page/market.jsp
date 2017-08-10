@@ -114,6 +114,8 @@
                 <li class="header">MAIN NAVIGATION</li>
                 <li class="active treeview">
                     <a href="#">
+                <li >
+                    <a href="main">
                         <i class="fa fa-bar-chart-o"></i> <span>Stocks</span>
 
                     </a>
@@ -130,9 +132,8 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="pages/layout/top-nav.html"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
-                        <li><a href="pages/layout/boxed.html"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
-                        <li><a href="pages/layout/fixed.html"><i class="glyphicon glyphicon-search"></i> Search Stock</a></li>
+                        <li><a href="list"><i class="glyphicon glyphicon-list-alt"></i>My Portfolio List</a></li>
+                        <li><a href="addPortfolio"><i class="glyphicon glyphicon-plus"></i> Add Portfolio List</a></li>
 
                     </ul>
                 </li>
@@ -141,22 +142,18 @@
                         <i class="fa fa-line-chart"></i> <span>Single Stock</span>
                     </a>
                 </li>
-                <li class="active treeview menu-open">
+                <li >
                     <a href="market">
                         <i class="glyphicon glyphicon-globe"></i> <span>Market Analysis</span>
                     </a>
                 </li>
 
-                <li class="active treeview menu-open">
-                    <a href="#">
+                <li >
+                    <a href="export">
                         <i class="glyphicon glyphicon-log-out"></i> <span>Export Data</span>
                     </a>
                 </li>
 
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -407,13 +404,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.4.0
-        </div>
-        <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-        reserved.
-    </footer>
+
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -629,9 +620,9 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="resources/bower_components/chart.js/Chart.js"></script>
-<script src="js/echarts/echarts.js"></script>
-
+<script src="resources/bower_components/Chart.js/Chart.js"></script>
+<script src="js/echarts/echarts.min.js"></script>
 <script src="js/apps/singlestock.js"></script>
 </body>
 </html>
+

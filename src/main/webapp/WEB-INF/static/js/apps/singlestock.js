@@ -13,6 +13,7 @@ function Init() {
     InitCandleStick();
     InitMarketSelector();
     InitStockNameSelector();
+    InitCategorySelector();
     InitSearchButton();
 }
 
@@ -109,19 +110,24 @@ function formatRepoSelection (repo) {
     return repo.text;
 }
 
+function InitCategorySelector() {
+    $("#category").select2();
+}
+
 function InitSearchButton() {
     $("#search").click(function () {
-        var market = $("#market").find("option:selected").text();;
+        var market = $("#market").find("option:selected").text();
         var stockName = $("#stockName").val();
+        var category = $("#category").find("option:selected").text();
         option.title.text = market + "-" + stockName;
         $.ajax({
-            url: "stockprice/1min/" + stockName,
+            url: "stockprice/" + category + "/" + stockName,
             type: "GET",
             contentType: "application/json; charset=utf-8",
             complete: function (data) {
                 date2 = data.responseJSON;
-                var fafaef =splitData(date2);
-                data0 = fafaef;
+                var split =splitData(date2);
+                data0 = split;
                 if (option && typeof option === "object") {
                     setCustomOption();
                     myChart.setOption(option, true);
@@ -130,14 +136,46 @@ function InitSearchButton() {
                 }
             }
         });
+
+        $.ajax({
+            url: "stockRela/" + stockName,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            complete: function (data) {
+                $("#relateTable tr:gt(0)").remove();
+                $.each(data.responseJSON,function (index, value) {
+                    var sub1 = 1;
+                    if(data.responseJSON.length > 1) {
+                        var test = data.responseJSON[data.responseJSON.length - 1].ccvalue;
+                        sub1 = data.responseJSON[0].ccvalue - test;
+                    }
+                    var sub2 = data.responseJSON[0].ccvalue - value.ccvalue;
+                    if(sub1 == 0)
+                        sub1 = 1;
+                    var res = 1 - sub2 / sub1;
+                    var newRow = "<tr><td>" + (index + 1) +
+                        "</td><td>" + value.stock2 +
+                        "</td><td><div class='progress progress-xs'> <div class='progress-bar progress-bar-yellow' style='width: " + res *100 +
+                        "%'></div></div>" +
+                        "</td><td><span class='label label-danger'>Unavailable</span></td></tr>";
+                    $("#relateTable tr:last").after(newRow);
+                })
+            }
+        });
     })
 }
 
 function setCustomOption() {
+    if(data0.values.length == 0) {
+        alert("No data of such stock!");
+        return;
+    }
+    var category = $("#category").find("option:selected").text() + "_K";
+    option.legend.data[0] = category;
     option.xAxis.data = data0.categoryData;
     option.series = [
         {
-            name: 'minute_K',
+            name: category,
             type: 'candlestick',
             data: data0.values,
             markPoint: {
@@ -421,9 +459,11 @@ function setOption() {
 function splitData(rawData) {
     var categoryData = [];
     var values = []
-    for (var i = 0; i < rawData.length; i++) {
-        categoryData.push(rawData[i].splice(0, 1)[0]);
-        values.push(rawData[i])
+    if( rawData != null) {
+        for (var i = 0; i < rawData.length; i++) {
+            categoryData.push(rawData[i].splice(0, 1)[0]);
+            values.push(rawData[i])
+        }
     }
     return {
         categoryData: categoryData,

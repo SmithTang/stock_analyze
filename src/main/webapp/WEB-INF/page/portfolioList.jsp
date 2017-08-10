@@ -200,6 +200,7 @@
                                         </tr>
 
                                     </c:forEach>
+
                                 </table>
                             </div>
                             <!-- /.box-body -->
@@ -424,9 +425,5 @@
 <script src="resources/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
-<!-- ChartJS -->
-<script src="resources/bower_components/Chart.js/Chart.js"></script>
-<script src="resources/EchartJS/echarts.min.js"></script>
-<script src="resources/js/singlestock.js"></script>
 </body>
 </html>

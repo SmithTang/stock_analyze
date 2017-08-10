@@ -167,6 +167,62 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            <h1>
+                My Portfolios Management
+                <small>manage portfolio</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">My portfolios</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Stock Name</th>
+                                    <th>Market</th>
+                                    <th style="width: 40px">Operate</th>
+                                </tr>
+                                <c:forEach items="${stock }" var="p" varStatus="status">
+                                    <tr>
+                                        <td>${status.index+1 }</td>
+                                        <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
+                                        <td>${p.markId }</td>
+                                        <td><span class="badge bg-red" href="${pageContext.request.contextPath}/delete">delete</span></td>
+                                    </tr>
+
+                                </c:forEach>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
             <div class="input-group input-group-sm" style="width: 300px;">
                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search stock name...">
 

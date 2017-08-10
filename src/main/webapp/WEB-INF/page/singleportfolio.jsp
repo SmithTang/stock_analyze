@@ -42,58 +42,7 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
 
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
 
-
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
-                            <li class="user-body">
-                                <div class="row">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
-                </ul>
-            </div>
         </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
@@ -106,7 +55,7 @@
                     <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>${user.userName}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -167,6 +116,62 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            <h1>
+                My Portfolios Management
+                <small>manage portfolio</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">My portfolios</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th>Stock Name</th>
+                                    <th>Market</th>
+                                    <th style="width: 40px">Operate</th>
+                                </tr>
+                                <c:forEach items="${stock }" var="p" varStatus="status">
+                                    <tr>
+                                        <td>${status.index+1 }</td>
+                                        <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
+                                        <td>${p.markId }</td>
+                                        <td><span class="badge bg-red" href="${pageContext.request.contextPath}/delete">delete</span></td>
+                                    </tr>
+
+                                </c:forEach>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            <ul class="pagination pagination-sm no-margin pull-right">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
             <div class="input-group input-group-sm" style="width: 300px;">
                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search stock name...">
 
@@ -191,7 +196,7 @@
                                     </tr>
                                     <c:forEach items="${stock }" var="p" >
                                         <tr>
-                                            <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
+                                            <td><a  id="news" name="${p.stockName }" onclick="clickStock('${p.stockName }')">${p.stockName }</a></td>
                                             <td>${p.markId }</td>
                                             <td>Just Test</td>
                                             <td><a href="${pageContext.request.contextPath }/delete">delete&nbsp;</a></td>
@@ -205,6 +210,7 @@
                 <div class="box" style="width: 800px;"  id="div_list">
 
                 </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -424,6 +430,22 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="js/apps/singleportfolio.js"></script>
+<script>
+
+
+        function clickStock(s1){
+            $.ajax({
+                url: "http://localhost:5000/demo/"+s1,
+                type: "get",
+                ContentType: "text/html;charset=utf-8",
+                dataType:'json',
+                success: function (data) {
+                    $("#div_list").children().remove();
+                    $("#div_list").append(data);
+
+                }
+            });
+        }
+</script>
 </body>
 </html>

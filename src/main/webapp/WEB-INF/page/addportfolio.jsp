@@ -63,7 +63,7 @@
                     <img src="resources/adminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>${user.userName}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -132,30 +132,20 @@
 
         <!-- Main content -->
         <section class="content">
-
-            <form action="toAddPortfolio" method="post">
-                <table class="table table-hover">
-                    <tbody>
-                    <tr>
-                        <th>Portfolio Name:
-                            <input type="text"  name="PortfolioName">
-                        </th>
-
-                    </tr>
-                    <tr>
-                        <th>Stock Name:
-                            <input type="text" name="StockName">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
-                        </th>
-                    </tr>
-
-                    </tbody></table>
-
+            <div class="box-body">
+            <form action="toAddPortfolio" method="post" role="form">
+                <div class="form-group" style="width: 400px;margin-left: 30px;">
+                    <label>Portfolio Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Portfolio Name..." name="PortfolioName">
+                </div>
+                <div class="form-group" style="width: 400px;margin-left: 30px;">
+                    <label>Stock Name:</label>
+                    <input type="text" class="form-control" placeholder="Enter Stock Name..." name="StockName">
+                </div>
+                <button type="submit" class="btn btn-block btn-primary btn-lg" style="width: 400px;margin-left: 30px;">Add to Portfolio List</button>
             </form>
+            </div>
+
 
         </section>
         <!-- /.content -->

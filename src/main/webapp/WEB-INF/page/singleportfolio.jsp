@@ -179,7 +179,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="row">
-                        <div class="box" style="width: 800px;">
+                        <div class="box" style="width: 800px;" >
                             <!-- /.box-header -->
                             <div class="box-body table-responsive no-padding" >
                                 <table class="table table-hover">
@@ -191,7 +191,7 @@
                                     </tr>
                                     <c:forEach items="${stock }" var="p" >
                                         <tr>
-                                            <td><a href="${pageContext.request.contextPath }/queryPortfolio?name=${p.stockName }">${p.stockName }</a></td>
+                                            <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
                                             <td>${p.markId }</td>
                                             <td>Just Test</td>
                                             <td><a href="${pageContext.request.contextPath }/delete">delete&nbsp;</a></td>
@@ -202,6 +202,7 @@
                             </div>
                             <!-- /.box-body -->
                         </div>
+                <div class="box" style="width: 800px;"  id="div_list">
 
                 </div>
         </section>
@@ -423,8 +424,6 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="resources/bower_components/Chart.js/Chart.js"></script>
-<script src="resources/EchartJS/echarts.min.js"></script>
-<script src="resources/js/singlestock.js"></script>
+<script src="js/apps/singleportfolio.js"></script>
 </body>
 </html>

@@ -191,7 +191,7 @@
                                     </tr>
                                     <c:forEach items="${stock }" var="p" >
                                         <tr>
-                                            <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
+                                            <td><a  id="news" name="${p.stockName }" onclick="clickStock('${p.stockName }')">${p.stockName }</a></td>
                                             <td>${p.markId }</td>
                                             <td>Just Test</td>
                                             <td><a href="${pageContext.request.contextPath }/delete">delete&nbsp;</a></td>
@@ -205,6 +205,7 @@
                 <div class="box" style="width: 800px;"  id="div_list">
 
                 </div>
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -424,6 +425,22 @@
 <!-- AdminLTE App -->
 <script src="resources/adminLTE/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
-<script src="js/apps/singleportfolio.js"></script>
+<script>
+
+
+        function clickStock(s1){
+            $.ajax({
+                url: "http://localhost:5000/demo/"+s1,
+                type: "get",
+                ContentType: "text/html;charset=utf-8",
+                dataType:'json',
+                success: function (data) {
+                    $("#div_list").children().remove();
+                    $("#div_list").append(data);
+
+                }
+            });
+        }
+</script>
 </body>
 </html>

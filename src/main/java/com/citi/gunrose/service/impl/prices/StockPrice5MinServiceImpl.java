@@ -29,4 +29,20 @@ public class StockPrice5MinServiceImpl extends BaseServiceImpl<Stockprice5Min> i
         else
             return result;
     }
+
+    @Override
+    public List<Object[]> getListByFakeTime(String fakeTime) {
+        int maxSize = 20;
+        return stockPrice5MinDao.selectListByFakeTime(fakeTime, maxSize);
+    }
+
+    @Override
+    public List<Object[]> getByStockNameAndFakeTime(String stockName, String fakeTime) {
+        return stockPrice5MinDao.selectByStockNameAndFakeTime(stockName, fakeTime);
+    }
+
+    @Override
+    public List<Object[]> getListByStockNameBetweenFakeTime(String stockName, String fakeTime) {
+        return stockPrice5MinDao.selectByStockNameBetweenFakeTime(stockName, fakeTime);
+    }
 }

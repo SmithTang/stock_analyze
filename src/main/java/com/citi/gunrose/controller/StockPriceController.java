@@ -3,10 +3,7 @@ package com.citi.gunrose.controller;
 import com.citi.gunrose.service.prices.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -55,6 +52,13 @@ public class StockPriceController {
         return stockPrice5MinService.getListByStockName(stockName);
     }
 
+    @RequestMapping(value = "/5min/{stockname}/{fakeTime}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object[]> get5MinPriceByStockName(@PathVariable("stockname") String stockName,
+                                                  @PathVariable(value = "fakeTime") String fakeTime) {
+        return stockPrice5MinService.getListByStockNameBetweenFakeTime(stockName, fakeTime);
+    }
+
     @RequestMapping(value = "/10min/{stockname}", method = RequestMethod.GET)
     @ResponseBody
     public List<Object[]> get10MinPriceByStockName(@PathVariable("stockname") String stockName) {
@@ -77,6 +81,19 @@ public class StockPriceController {
     @ResponseBody
     public List<Object[]> get60MinPriceByStockName(@PathVariable("stockname") String stockName) {
         return stockPrice60MinService.getListByStockName(stockName);
+    }
+
+    @RequestMapping(value = "/fakeTime/{fakeTime}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object[]> fakeTime(@PathVariable("fakeTime") String fakeTime) {
+        return stockPrice5MinService.getListByFakeTime(fakeTime);
+    }
+
+    @RequestMapping(value = "/singleStock", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Object[]> singleStock(@RequestParam(value = "singleStock", required = true) String stockName,
+                                      @RequestParam(value = "fakeTime", required = true) String fakeTime) {
+        return stockPrice5MinService.getByStockNameAndFakeTime(stockName, fakeTime);
     }
 
 }

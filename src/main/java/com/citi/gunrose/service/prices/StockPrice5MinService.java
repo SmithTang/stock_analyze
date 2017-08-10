@@ -10,4 +10,10 @@ import java.util.List;
  */
 public interface StockPrice5MinService extends BaseService<Stockprice5Min> {
     List<Object[]> getListByStockName(String stockName);
+
+    List<Object[]> getListByFakeTime(String fakeTime);
+
+    List<Object[]> getByStockNameAndFakeTime(String stockName, String fakeTime);
+
+    List<Object[]> getListByStockNameBetweenFakeTime(String stockName, String fakeTime);
 }

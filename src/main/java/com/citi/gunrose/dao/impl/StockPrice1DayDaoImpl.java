@@ -1,8 +1,7 @@
 package com.citi.gunrose.dao.impl;
 
-import com.citi.gunrose.dao.StockPrice1MinDao;
-import com.citi.gunrose.persistence.model.Stock;
-import com.citi.gunrose.persistence.model.Stockprice1Min;
+import com.citi.gunrose.dao.StockPrice1DayDao;
+import com.citi.gunrose.persistence.model.Stockprice1Day;
 import org.hibernate.SQLQuery;
 import org.springframework.stereotype.Repository;
 
@@ -12,20 +11,20 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by tangjing on 2017/8/7.
+ * Created by tangjing on 2017/8/9.
  */
-@Repository("stockPrice1MinDao")
-public class StockPrice1MinDaoImpl extends BaseDaoImpl<Stockprice1Min> implements StockPrice1MinDao {
+@Repository("stockPrice1DayDao")
+public class StockPrice1DayDaoImpl extends BaseDaoImpl<Stockprice1Day> implements StockPrice1DayDao {
     @Override
     public List<Object[]> selectListByStockName(String stockName, int maxSize) {
-        SQLQuery sqlQuery = this.getSession().createSQLQuery("select s.Date,s.Open,s.Close,s.Low,s.High  from data_analysis.stockprice_1min as s where s.StockName ='"+stockName+"'");
+        SQLQuery sqlQuery = this.getSession().createSQLQuery("select s.Date,s.Open,s.Close,s.Low,s.High  from data_analysis.stockprice_1day as s where s.StockName ='"+stockName+"'");
         sqlQuery.setMaxResults(maxSize);
         List<Object[]> result = sqlQuery.list();
 
         for(Object[] each : result) {
             try {
-                Date date = new SimpleDateFormat("yyyyMMddHHmm").parse((String) each[0]);
-                each[0] = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+                Date date = new SimpleDateFormat("yyyyMMdd").parse((String) each[0]);
+                each[0] = new SimpleDateFormat("yyyy-MM-dd").format(date);
             }
             catch (ParseException e) {
                 e.printStackTrace();

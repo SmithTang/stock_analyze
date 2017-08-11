@@ -40,10 +40,10 @@ public class UserController {
         user = users.get(0);
         httpSession.setAttribute("loginUser",user);
         if(users.isEmpty()) {
-            return "/register";
+            return "redirect:/register";
         }
 
-        return "/main";
+        return "redirect:/main";
     }
 
     @RequestMapping("toRegister")
@@ -51,7 +51,7 @@ public class UserController {
 
         userService.save(user);
         attr.addFlashAttribute(user);
-        return "/login";
+        return "redirect:/login";
     }
 
 

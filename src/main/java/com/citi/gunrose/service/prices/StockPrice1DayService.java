@@ -1,6 +1,7 @@
-package com.citi.gunrose.service;
+package com.citi.gunrose.service.prices;
 
 import com.citi.gunrose.persistence.model.Stockprice1Day;
+import com.citi.gunrose.service.BaseService;
 
 import java.util.List;
 

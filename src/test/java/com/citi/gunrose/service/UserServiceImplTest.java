@@ -1,4 +1,4 @@
-package com.citi.gunrose.service;
+package java.com.citi.gunrose.service;
 
 import com.citi.gunrose.dao.UserDao;
 import com.citi.gunrose.persistence.model.User;

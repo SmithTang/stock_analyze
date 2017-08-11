@@ -1,8 +1,9 @@
-package com.citi.gunrose.service.impl;
+package com.citi.gunrose.service.impl.prices;
 
-import com.citi.gunrose.dao.StockPrice1DayDao;
+import com.citi.gunrose.dao.prices.StockPrice1DayDao;
 import com.citi.gunrose.persistence.model.Stockprice1Day;
-import com.citi.gunrose.service.StockPrice1DayService;
+import com.citi.gunrose.service.impl.BaseServiceImpl;
+import com.citi.gunrose.service.prices.StockPrice1DayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

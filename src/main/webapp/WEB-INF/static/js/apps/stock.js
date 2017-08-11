@@ -3,18 +3,156 @@ var myChart = echarts.init(document.getElementById('singlestock'));
 
 var data0={};
 var option={};
+var fakeTime = 201307010930;
+
 $(document).ready(function () {
 
     Init();
 
-})
+});
 
 function Init() {
-    InitMarketSelector();
-    InitStockNameSelector();
-    InitCategorySelector();
-    InitCandleStick();
+    InitTable();
     InitSearchButton();
+    InitPlayButton();
+    InitPauseButton();
+    InitResetButton();
+    InitCandleStick();
+}
+
+function InitTable() {
+    $.ajax({
+        url: "stockprice/fakeTime/" + fakeTime,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        complete: function (data) {
+            $("#stockTable tr:gt(0)").remove();
+            $.each(data.responseJSON,function (index, value) {
+                var newRow = "<tr><td>" + value[0] +
+                    "</td><td>" + value[2];
+                if(value[3] >= 0.000000)
+                    newRow += "</td><td><span class='label label-danger'>" + (value[3]).toFixed(2) + "%" + "</span></td></tr>";
+                else
+                    newRow += "</td><td><span class='label label-success'>" + (value[3]).toFixed(2) + "%" + "</span></td></tr>";
+                $("#stockTable tr:last").after(newRow);
+            })
+        }
+    });
+}
+
+function InitSearchButton() {
+    $("#searchButton").click(function () {
+        var stockName = $("#stockName").val();
+        $.ajax({
+            url: "stockprice/singleStock",
+            type: "get",
+            data: {
+                "singleStock": stockName,
+                "fakeTime": fakeTime
+            },
+            contentType: "application/json; charset=utf-8",
+            complete: function (data) {
+                if(data.responseJSON.length == 0) {
+                    alert("No data for such stock!");
+                    return ;
+                }
+                $("#stockTable tr:gt(0)").remove();
+                $.each(data.responseJSON,function (index, value) {
+
+                    var newRow = "<tr><td>" + value[0] +
+                        "</td><td>" + value[2];
+                    if(value[3] >= 0.000000)
+                        newRow += "</td><td><span class='label label-danger'>" + (value[3]).toFixed(2) + "%" + "</span></td></tr>";
+                    else
+                        newRow += "</td><td><span class='label label-success'>" + (value[3]).toFixed(2) + "%" + "</span></td></tr>";
+                    $("#stockTable tr:last").after(newRow);
+                })
+            }
+        });
+
+        var market = "Unknown Market";
+        var category = "5min";
+        option.title.text = market + "-" + stockName;
+        $.ajax({
+            url: "stockprice/" + category + "/" + stockName,
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            complete: function (data) {
+                date2 = data.responseJSON;
+                var split =splitData(date2);
+                data0 = split;
+                if (option && typeof option === "object") {
+                    setCustomOption();
+                    myChart.setOption(option, true);
+                }
+                else {
+                }
+            }
+        });
+    });
+}
+var task = {};
+function InitPlayButton() {
+    $("#play").click(function () {
+        var stockName = $("#stockName").val();
+        if(stockName != null && stockName.trim() != "") {
+            task = setInterval(refreshSingle, 2000);
+        }
+        else {
+            task = setInterval(refreshTables ,5000);
+        }
+        $("#pause").attr("disabled",false);
+        $("#reset").attr("disabled",false);
+        $("#play").attr("disabled",true);
+    })
+}
+
+function InitPauseButton() {
+    $("#pause").click(function () {
+        clearInterval(task);
+        $("#pause").attr("disabled",true);
+        $("#play").attr("disabled",false);
+    })
+}
+
+function InitResetButton() {
+    $("#reset").click(function () {
+        clearInterval(task);
+        fakeTime = 201307010930;
+        InitTable();
+        $("#reset").attr("disabled",true);
+        $("#pause").attr("disabled",true);
+        $("#play").attr("disabled",false);
+    })
+}
+
+function refreshTables() {
+    fakeTime +=5;
+    InitTable();
+}
+
+function refreshSingle() {
+    fakeTime +=5;
+    var market = "Unknown Market";
+    var category = "5min";
+    var stockName = $("#stockName").val();
+    option.title.text = market + "-" + stockName;
+    $.ajax({
+        url: "stockprice/" + category + "/" + stockName + "/" + fakeTime,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        complete: function (data) {
+            date2 = data.responseJSON;
+            var split =splitData(date2);
+            data0 = split;
+            if (option && typeof option === "object") {
+                setCustomOption();
+                myChart.setOption(option, true);
+            }
+            else {
+            }
+        }
+    });
 }
 
 function InitCandleStick() {
@@ -34,145 +172,28 @@ function InitCandleStick() {
     });
 }
 
-function InitMarketSelector() {
-    $("#market").select2();
-    $("#market").ready(function () {
-        $.ajax({
-            url: "market/listAll",
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            complete: function (data,textStatus,jqXHR) {
-                $("#market").empty();
-                $.each(data.responseJSON,function (index, value) {
-                    if(index == 0) {
-                        $("#market").append("<option value='" + value.marketId + "'"+ " selected='selected'>" + value.marketName + "</option>");
-                    }
-                    else {
-                        $("#market").append("<option value='" + value.marketId + "'>" + value.marketName + "</option>");
-                    }
-                })
-            }
-        });
-    })
-}
-
-function InitStockNameSelector() {
-
-    $("#stockName").select2({
-        ajax: {
-            url: "stock/search",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page,
-                    market: $("#market").val()
-                };
-            },
-            processResults: function (data, params) {
-                // parse the results into the format expected by Select2
-                // since we are using custom formatting functions we do not need to
-                // alter the remote JSON data, except to indicate that infinite
-                // scrolling can be used
-                params.page = params.page || 1;
-                return {
-                    results: data.items,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        minimumInputLength: 1,
-        escapeMarkup: function (markup) { return markup; },
-        templateResult: formatRepo, // omitted for brevity, see the source of this page
-        templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-    });
-}
-
-function formatRepo (repo) {
-    /*if (repo.loading) return repo.text;
-    var markup = "<div class='select2-result-repository clearfix'>" +
-        "<div class='select2-result-repository__meta'>" +
-        "<div class='select2-result-repository__title'>" + repo + "</div>";
-
-    if (repo.description) {
-        markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
-    }
-
-    return markup;*/
-    return repo.text;
-}
-
-function formatRepoSelection (repo) {
-    return repo.text;
-}
-
-function InitCategorySelector() {
-    $("#category").select2();
-}
-
-function InitSearchButton() {
-    $("#search").click(function () {
-        var market = $("#market").find("option:selected").text();
-        var stockName = $("#stockName").val();
-        var category = $("#category").find("option:selected").text();
-        option.title.text = market + "-" + stockName;
-        $.ajax({
-            url: "stockprice/" + category + "/" + stockName,
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            complete: function (data) {
-                date2 = data.responseJSON;
-                var split =splitData(date2);
-                data0 = split;
-                if (option && typeof option === "object") {
-                    setCustomOption();
-                    myChart.setOption(option, true);
-                }
-                else {
-                }
-            }
-        });
-
-        $.ajax({
-            url: "stockRela/" + stockName,
-            type: "GET",
-            contentType: "application/json; charset=utf-8",
-            complete: function (data) {
-                $("#relateTable tr:gt(0)").remove();
-                $.each(data.responseJSON,function (index, value) {
-                    var sub1 = 1;
-                    if(data.responseJSON.length > 1) {
-                        var test = data.responseJSON[data.responseJSON.length - 1].ccvalue;
-                        sub1 = data.responseJSON[0].ccvalue - test;
-                    }
-                    var sub2 = data.responseJSON[0].ccvalue - value.ccvalue;
-                    if(sub1 == 0)
-                        sub1 = 1;
-                    var res = 1 - sub2 / sub1;
-                    var newRow = "<tr><td>" + (index + 1) +
-                        "</td><td>" + value.stock2 +
-                        "</td><td><div class='progress progress-xs'> <div class='progress-bar progress-bar-yellow' style='width: " + res *100 +
-                        "%'></div></div>" +
-                        "</td><td><span class='label label-danger'>Unavailable</span></td></tr>";
-                    $("#relateTable tr:last").after(newRow);
-                })
-            }
-        });
-    })
-}
-
 function setCustomOption() {
     if(data0.values.length == 0) {
         alert("No data of such stock!");
         return;
     }
-    var category = $("#category").find("option:selected").text() + "_K";
+    var category =  "5min_K";
     option.legend.data[0] = category;
     option.xAxis.data = data0.categoryData;
+    option.dataZoom = [
+        {
+            type: 'inside',
+            start: 0,
+            end: 100
+        },
+        {
+            show: true,
+            type: 'slider',
+            y: '90%',
+            start: 0,
+            end: 100
+        }
+    ];
     option.series = [
         {
             name: category,
@@ -265,25 +286,7 @@ function setCustomOption() {
             lineStyle: {
                 normal: {opacity: 0.5}
             }
-        },
-        {
-            name: 'MA20',
-            type: 'line',
-            data: calculateMA(20),
-            smooth: true,
-            lineStyle: {
-                normal: {opacity: 0.5}
-            }
-        },
-        {
-            name: 'MA30',
-            type: 'line',
-            data: calculateMA(30),
-            smooth: true,
-            lineStyle: {
-                normal: {opacity: 0.5}
-            }
-        },
+        }
 
     ];
 }
@@ -302,7 +305,7 @@ function setOption() {
             }
         },
         legend: {
-            data: ['minute_K', 'MA5', 'MA10', 'MA20', 'MA30']
+            data: ['minute_K', 'MA5', 'MA10']
         },
         grid: {
             left: '10%',
@@ -432,25 +435,7 @@ function setOption() {
                 lineStyle: {
                     normal: {opacity: 0.5}
                 }
-            },
-            {
-                name: 'MA20',
-                type: 'line',
-                data: calculateMA(20),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
-            {
-                name: 'MA30',
-                type: 'line',
-                data: calculateMA(30),
-                smooth: true,
-                lineStyle: {
-                    normal: {opacity: 0.5}
-                }
-            },
+            }
 
         ]
     };

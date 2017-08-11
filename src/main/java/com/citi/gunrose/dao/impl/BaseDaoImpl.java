@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,5 +86,25 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         }
 
         return entitylist;
+    }
+
+    protected List<Object[]> stockPriceFormater(List<Object[]> input, String pattern) {
+        for(Object[] each : input) {
+            try {
+                Date date = null;
+                if(pattern.equals("yyyyMMddHHmm")) {
+                    date = new SimpleDateFormat("yyyyMMddHHmm").parse((String) each[0]);
+                    each[0] = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+                }
+                else if(pattern.equals("yyyyMMdd")) {
+                    date = new SimpleDateFormat("yyyyMMdd").parse((String) each[0]);
+                    each[0] = new SimpleDateFormat("yyyy-MM-dd").format(date);
+                }
+            }
+            catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return input;
     }
 }

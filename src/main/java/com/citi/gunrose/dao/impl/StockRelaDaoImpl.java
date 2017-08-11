@@ -15,7 +15,7 @@ public class StockRelaDaoImpl extends BaseDaoImpl<StockRela> implements StockRel
 
     @Override
     public List<StockRela> selectRela(String stock1) {
-        SQLQuery sqlQuery = this.getSession().createSQLQuery("select * from data_analysis.stock_rela s where s.Stock1='" + stock1 + "' order by s.CCValue DESC");
+        SQLQuery sqlQuery = this.getSession().createSQLQuery("select * from data_analysis.stock_rela s where s.Stock1='" + stock1 + "' and s.CCValue != 1 order by s.CCValue DESC");
         sqlQuery.addEntity(StockRela.class);
         sqlQuery.setMaxResults(50);
         return (List<StockRela>) sqlQuery.list();

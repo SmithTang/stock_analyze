@@ -138,7 +138,7 @@
                                 <c:forEach items="${stock }" var="p" varStatus="status">
                                     <tr>
                                         <td>${status.index+1 }</td>
-                                        <td><a  id="news" name="${p.stockName }">${p.stockName }</a></td>
+                                        <td><a  id="news" name="${p.stockName }" onclick="clickStock('${p.stockName }')">${p.stockName }</a></td>
                                         <td>${p.markId }</td>
                                         <td><span class="badge bg-red" href="${pageContext.request.contextPath}/delete">delete</span></td>
                                     </tr>
@@ -146,6 +146,7 @@
                                 </c:forEach>
                             </table>
                         </div>
+
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">
                             <ul class="pagination pagination-sm no-margin pull-right">
@@ -162,6 +163,9 @@
                 <!-- /.col -->
             </div>
             <!-- /.row -->
+            <div  id="div_list">
+
+            </div>
         </section>
         <!-- /.content -->
     </div>
@@ -177,37 +181,6 @@
             </div>
         </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                        <div class="box" style="width: 800px;" >
-                            <!-- /.box-header -->
-                            <div class="box-body table-responsive no-padding" >
-                                <table class="table table-hover">
-                                    <tr>
-                                        <td>Stock Name</td>
-                                        <td>Market</td>
-                                        <td>Description</td>
-                                        <td>Operate</td>
-                                    </tr>
-                                    <c:forEach items="${stock }" var="p" >
-                                        <tr>
-                                            <td><a  id="news" name="${p.stockName }" onclick="clickStock('${p.stockName }')">${p.stockName }</a></td>
-                                            <td>${p.markId }</td>
-                                            <td>Just Test</td>
-                                            <td><a href="${pageContext.request.contextPath }/delete">delete&nbsp;</a></td>
-                                        </tr>
-
-                                    </c:forEach>
-                                </table>
-                            </div>
-                            <!-- /.box-body -->
-                        </div>
-                <div class="box" style="width: 800px;"  id="div_list">
-
-                </div>
-            </div>
-        </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
